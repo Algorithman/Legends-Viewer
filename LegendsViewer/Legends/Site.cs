@@ -12,6 +12,11 @@ namespace LegendsViewer.Legends
 {
     public class Site : WorldObject
     {
+
+        public override string GetBookmark()
+        {
+            return this.ID + "," + nameof(Site);
+        }
         public string Icon = "<i class=\"fa fa-fw fa-home\"></i>";
 
         public string Type { get; set; }

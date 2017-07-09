@@ -105,5 +105,9 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return ToLink(false);
         }
+        public override string GetBookmark()
+        {
+            return this.ID + "," + nameof(BeastAttack);
+        }
     }
 }

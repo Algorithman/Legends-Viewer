@@ -69,5 +69,9 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return "a theft";
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

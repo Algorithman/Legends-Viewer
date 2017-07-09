@@ -10,6 +10,10 @@ namespace LegendsViewer.Legends.EventCollections
 {
     public class Battle : EventCollection
     {
+        public override string GetBookmark()
+        {
+            return this.ID + "," + nameof(Battle);
+        }
         public static readonly string Icon = "<i class=\"glyphicon fa-fw glyphicon-bishop\"></i>";
 
         public string Name { get; set; }

@@ -55,5 +55,9 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return Name;
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

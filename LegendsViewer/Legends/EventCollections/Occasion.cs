@@ -39,5 +39,10 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return "an occasion";
         }
+
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

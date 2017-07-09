@@ -112,5 +112,9 @@ namespace LegendsViewer.Legends.EventCollections
             return ToLink(false);
         }
 
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

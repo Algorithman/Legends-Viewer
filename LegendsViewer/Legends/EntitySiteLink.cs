@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using LegendsViewer.Legends.Parser;
+using System;
 
 namespace LegendsViewer.Legends
 {
@@ -10,6 +11,10 @@ namespace LegendsViewer.Legends
 
     public class EntitySiteLink : DwarfObject // legends_plus.xml
     {
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
         public EntitySiteLink(List<Property> properties, World world)
         {
             Type = EntitySiteLinkType.Unknown;

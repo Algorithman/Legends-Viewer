@@ -72,5 +72,9 @@ namespace LegendsViewer.Legends
         {
             return Type.GetDescription();
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

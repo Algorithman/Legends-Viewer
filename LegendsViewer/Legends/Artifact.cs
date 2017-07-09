@@ -11,6 +11,11 @@ namespace LegendsViewer.Legends
     {
         public static string Icon = "<i class=\"fa fa-fw fa-diamond\"></i>";
 
+        public override string GetBookmark()
+        {
+            return this.ID + "," + nameof(Artifact);
+        }
+
         public string Name { get; set; }
         public string Item { get; set; }
         public HistoricalFigure Creator { get; set; }

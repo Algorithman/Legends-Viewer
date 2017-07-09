@@ -751,5 +751,71 @@ namespace LegendsViewer.Legends
                 PageMiniMap.Dispose();
             }
         }
+
+        public object FindBookmark(string bookmark)
+        {
+            string[] data = bookmark.Split(',');
+            string type = data.Last();
+
+            switch (type)
+            {
+                case nameof(HistoricalFigure):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.HistoricalFigures.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(Artifact):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.Artifacts.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(EntityPopulation):
+                    {
+                        int id = int.Parse(data[0]);
+                        int entityId = int.Parse(data[1]);
+                        return this.EntityPopulations.FirstOrDefault(x => (x.ID == id) && (x.EntityID == entityId));
+                    }
+                case nameof(Site):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.Sites.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(War):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.Wars.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(Entity):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.Entities.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(BeastAttack):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.BeastAttacks.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(Abduction):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.EventCollections.Where(x=>x is Abduction).FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(Battle):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.Battles.FirstOrDefault(x => x.ID == id);
+                    }
+                case nameof(Structure):
+                    {
+                        int id = int.Parse(data[0]);
+                        return this.Structures.FirstOrDefault(x => x.GlobalID == id);
+                    }
+
+
+
+
+            }
+            return null;
+        }
     }
 }

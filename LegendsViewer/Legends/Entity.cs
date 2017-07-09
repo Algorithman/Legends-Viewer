@@ -344,5 +344,9 @@ namespace LegendsViewer.Legends
             }
             return Name;
         }
+        public override string GetBookmark()
+        {
+            return this.ID + "," + nameof(Entity);
+        }
     }
 }

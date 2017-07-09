@@ -53,6 +53,8 @@
             this.btnStats = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnForward = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.scWorld)).BeginInit();
             this.scWorld.Panel1.SuspendLayout();
             this.scWorld.Panel2.SuspendLayout();
@@ -98,6 +100,8 @@
             // 
             // scWorld.Panel2
             // 
+            this.scWorld.Panel2.Controls.Add(this.comboBox1);
+            this.scWorld.Panel2.Controls.Add(this.button1);
             this.scWorld.Panel2.Controls.Add(this.btnChart);
             this.scWorld.Panel2.Controls.Add(this.btnMap);
             this.scWorld.Panel2.Controls.Add(this.btnStats);
@@ -311,6 +315,25 @@
             this.btnForward.UseVisualStyleBackColor = true;
             this.btnForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(327, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(121, 23);
+            this.button1.TabIndex = 38;
+            this.button1.Text = "Add to Bookmarks";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(454, 5);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(410, 21);
+            this.comboBox1.TabIndex = 39;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
             // frmLegendsViewer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -368,6 +391,8 @@
         private System.Windows.Forms.Button btnStats;
         private System.Windows.Forms.Button btnChart;
         private System.Windows.Forms.Button btnMap;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

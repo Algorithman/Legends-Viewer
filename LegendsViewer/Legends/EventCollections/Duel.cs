@@ -71,5 +71,10 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return "a duel";
         }
+
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

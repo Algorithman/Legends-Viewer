@@ -34,5 +34,10 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return "a "+(!string.IsNullOrWhiteSpace(Adjective) ? Adjective.ToLower()+" " : "")+"purge";
         }
+
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

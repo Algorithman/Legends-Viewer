@@ -8,6 +8,10 @@ namespace LegendsViewer.Legends.EventCollections
 {
     public class Journey : EventCollection
     {
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
         public string Ordinal;
         public List<string> Filters;
         public override List<WorldEvent> FilteredEvents

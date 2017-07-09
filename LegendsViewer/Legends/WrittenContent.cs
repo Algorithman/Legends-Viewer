@@ -126,5 +126,9 @@ namespace LegendsViewer.Legends
                 return Name;
             }
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

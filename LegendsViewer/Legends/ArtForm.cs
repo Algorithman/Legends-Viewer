@@ -13,6 +13,11 @@ namespace LegendsViewer.Legends
         {
             get { return Events.Where(dwarfEvent => !Filters.Contains(dwarfEvent.Type)).ToList(); }
         }
+        
+        public override string GetBookmark()
+        {
+            return this.ID + "," + GetType().FullName;
+        }
 
         public ArtForm(List<Property> properties, World world)
             : base(properties, world)

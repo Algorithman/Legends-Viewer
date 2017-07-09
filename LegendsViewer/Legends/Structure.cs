@@ -176,5 +176,9 @@ namespace LegendsViewer.Legends
                 return Icon + Name;
             }
         }
+        public override string GetBookmark()
+        {
+            return this.GlobalID + "," + nameof(Structure);
+        }
     }
 }

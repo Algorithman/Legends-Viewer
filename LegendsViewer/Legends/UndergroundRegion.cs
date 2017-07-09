@@ -77,6 +77,10 @@ namespace LegendsViewer.Legends
             else
                 return name;
         }
-        
+
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

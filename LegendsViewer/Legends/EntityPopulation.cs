@@ -8,6 +8,12 @@ namespace LegendsViewer.Legends
 {
     public class EntityPopulation : WorldObject
     {
+
+        public override string GetBookmark()
+        {
+            return this.ID + "," + this.EntityID + "," + nameof(EntityPopulation);
+        }
+
         public string Race { get; set; } // legends_plus.xml
         public int Count { get; set; } // legends_plus.xml
         public int EntityID { get; set; } // legends_plus.xml

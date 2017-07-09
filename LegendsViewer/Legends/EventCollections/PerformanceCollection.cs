@@ -28,5 +28,10 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return "a performance";
         }
+
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

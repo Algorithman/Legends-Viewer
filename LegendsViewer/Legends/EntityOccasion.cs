@@ -10,6 +10,12 @@ namespace LegendsViewer.Legends
 {
     public class EntityOccasion : WorldObject
     {
+
+        public override string GetBookmark()
+        {
+            return this.ID + "," + GetType().FullName;
+        }
+
         public string Name { get; set; } // legends_plus.xml
 
         public string Icon { get; set; }

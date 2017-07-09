@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,6 +10,9 @@ using System.Diagnostics;
 using LegendsViewer.Controls.HTML.Utilities;
 using LegendsViewer.Controls.Tabs;
 using LegendsViewer.Legends.EventCollections;
+using Newtonsoft.Json;
+using LegendsViewer.Controls.Map;
+using System.ComponentModel;
 
 namespace LegendsViewer
 {
@@ -26,9 +30,25 @@ namespace LegendsViewer
 
         private LVCoordinator Coordinator { get; set; }
 
+        private BindingList<LegendsBookmark> Bookmarks { get; set; }
+
+        BindingSource bullshittery;
+
         public frmLegendsViewer(string file = "")
         {
             InitializeComponent();
+
+            this.Bookmarks = new BindingList<LegendsBookmark>();
+            if (File.Exists("Bookmarks.json"))
+            {
+                using (StreamReader sr = new StreamReader("Bookmarks.json"))
+                {
+                    Bookmarks = JsonConvert.DeserializeObject<BindingList<LegendsBookmark>>(sr.ReadToEnd());
+                }
+            }
+            bullshittery = new BindingSource();
+            bullshittery.DataSource = Bookmarks;
+            this.comboBox1.DataSource = bullshittery;
 
             // Start local http server
             LocalFileProvider.Run();
@@ -106,6 +126,7 @@ namespace LegendsViewer
 
             Browser.World = World;
             Text += " - " + World.Name;
+
             Browser.Navigate(ControlOption.HTML, World);
 
             foreach (var v in tcWorld.TabPages.OfType<TabPage>().SelectMany(x => x.Controls.OfType<BaseSearchTab>()))
@@ -184,18 +205,106 @@ namespace LegendsViewer
 
         private void open_ReadMe(object sender, EventArgs e)
         {
-            Browser.Navigate(ControlOption.ReadMe);
+            Browser?.Navigate(ControlOption.ReadMe);
         }
 
         private void frmLegendsViewer_FormClosed(object sender, FormClosedEventArgs e)
         {
             World?.Dispose();
             LocalFileProvider.Stop();
+            using (StreamWriter sw = new StreamWriter("Bookmarks.json"))
+            {
+                sw.WriteLine(JsonConvert.SerializeObject(Bookmarks, Newtonsoft.Json.Formatting.Indented));
+            }
         }
 
         private void OnSelectedIndexChanged(object sender, EventArgs e)
         {
             (sender as TabControl)?.SelectedTab?.Controls.OfType<BaseSearchTab>().FirstOrDefault()?.DoSearch();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DwarfTabPage tab = Browser?.SelectedTab as DwarfTabPage;
+            string newBookmarkIdentifier = "";
+            ControlOption controlOption = ControlOption.ReadMe;
+            if (tab.Current is HTMLControl)
+            {
+                try
+                {
+                    newBookmarkIdentifier = ((WorldObject)((HTMLControl)tab.Current).HTMLObject).GetBookmark();
+                }
+                catch
+                {
+                    try
+                    {
+                        newBookmarkIdentifier = ((EventCollection)((HTMLControl)tab.Current).HTMLObject).GetBookmark();
+                    }
+                    catch
+                    { }
+                }
+                controlOption = ControlOption.HTML;
+            }
+            if (tab.Current is ChartControl)
+            {
+                try
+                {
+                    newBookmarkIdentifier = ((WorldObject)((ChartControl)tab.Current).FocusObject).GetBookmark();
+                }
+                catch
+                {
+                    try
+                    {
+                        newBookmarkIdentifier = ((EventCollection)((ChartControl)tab.Current).FocusObject).GetBookmark();
+                    }
+                    catch { }
+                }
+                controlOption = ControlOption.Chart;
+            }
+            if (tab.Current is MapControl)
+            {
+                try
+                {
+                    newBookmarkIdentifier = ((WorldObject)((MapControl)tab.Current).FocusObject).GetBookmark();
+                }
+                catch
+                {
+                    try
+                    {
+                        newBookmarkIdentifier = ((EventCollection)((MapControl)tab.Current).FocusObject).GetBookmark();
+                    }
+                    catch { }
+                }
+                controlOption = ControlOption.Map;
+            }
+
+
+            if (newBookmarkIdentifier == "")
+            {
+                return;
+            }
+
+            LegendsBookmark newBookmark = new LegendsBookmark()
+            {
+                controlType = controlOption,
+                WorldName = World.Name,
+                WorldObjectDescriptor = newBookmarkIdentifier
+            };
+            Bookmarks.Add(newBookmark);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LegendsBookmark lb = comboBox1.SelectedItem as LegendsBookmark;
+            if (lb == null)
+            {
+                return;
+            }
+            object entity = World?.FindBookmark(lb.WorldObjectDescriptor);
+            if (entity != null)
+            {
+                Browser?.Navigate(lb.controlType, entity); ;
+            }
         }
     }
 }

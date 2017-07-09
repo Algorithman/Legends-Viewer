@@ -50,5 +50,10 @@ namespace LegendsViewer.Legends
             else return "(" + StartYear + " - " + EndYear + ")";
         }
         public override string ToString() { return Name; }
+
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

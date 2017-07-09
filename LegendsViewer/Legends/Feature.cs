@@ -37,5 +37,9 @@ namespace LegendsViewer.Legends
         {
             return Type;
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace LegendsViewer.Legends
+﻿using System;
+namespace LegendsViewer.Legends
 {
     public abstract class DwarfObject
     {
@@ -10,5 +11,7 @@
         {
             return "";
         }
+
+        public abstract string GetBookmark();
     }
 }

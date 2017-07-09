@@ -8,6 +8,10 @@ namespace LegendsViewer.Legends.EventCollections
 {
     public class Abduction : EventCollection
     {
+        public override string GetBookmark()
+        {
+            return this.ID + "," + nameof(Abduction);
+        }
         public string Ordinal;
         public Location Coordinates;
         public HistoricalFigure Abductee;

@@ -28,5 +28,9 @@ namespace LegendsViewer.Legends.EventCollections
         {
             return "a procession";
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

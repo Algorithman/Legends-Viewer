@@ -81,5 +81,9 @@ namespace LegendsViewer.Legends
             else
                 return Name;
         }
+        public override string GetBookmark()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
